@@ -9,9 +9,35 @@ services:
     ports:
       - ${PORT}
     volumes:
-      - ${PATHCONFIG}:/config
-      - ${PATHMEDIA}:/data
+      - plex_config:/config
+      - plex_data:/data
     network_mode: ${NET}
     labels:
       io.rancher.container.pull_image: always
       io.rancher.container.dns: 'true'
+  samba:
+    image: dperson/samba
+    environment:
+      - USERID=${PUID}
+      - GROUPID=${PGID}
+    command:
+      - "samba.sh"
+      - "-u"
+      - "plex;plex"
+      - "-s"
+      - "plexdata;/data;yes;no;no"
+      - "-s"
+      - "plexconfig;/config;yes;no;no"
+    volumes:
+      - plex_config:/config
+      - plex_data:/data
+    network_mode: ${NET}
+    ports:
+      - "137:137/udp"
+      - "138:138/udp"
+      - "139:139"
+      - "445:445"
+volumes:
+  plex_config:
+  plex_data:
+    driver: rancher-nfs
