@@ -41,3 +41,6 @@ services:
   plex:
     scale: 1
     start_on_create: true
+  samba:
+    scale: 1
+    start_on_create: true
