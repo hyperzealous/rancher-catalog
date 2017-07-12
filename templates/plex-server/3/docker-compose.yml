@@ -26,10 +26,7 @@ services:
       - "plex;plexpassword"
       - "-s"
       - "plexdata;/data;yes;no;yes"
-      - "-s"
-      - "plexconfig;/config;yes;no;yes"
     volumes:
-      - plex_config:/config
       - plex_data:/data
     network_mode: ${NET}
     ports:
