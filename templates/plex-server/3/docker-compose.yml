@@ -23,11 +23,11 @@ services:
     command:
       - "samba.sh"
       - "-u"
-      - "plex;plex"
+      - '"plex;plex"'
       - "-s"
-      - "plexdata;/data;yes;no;no"
+      - '"plexdata;/data;yes;no;no"'
       - "-s"
-      - "plexconfig;/config;yes;no;no"
+      - '"plexconfig;/config;yes;no;no"'
     volumes:
       - plex_config:/config
       - plex_data:/data
